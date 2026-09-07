@@ -1,0 +1,87 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Honeycomb palette — wax cream, hive brown, gold/amber accents */
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.955 0.04 92);
+  --foreground: oklch(0.29 0.05 58);
+  --card: oklch(0.985 0.02 95);
+  --card-foreground: oklch(0.29 0.05 58);
+  --popover: oklch(0.985 0.02 95);
+  --popover-foreground: oklch(0.29 0.05 58);
+  --primary: oklch(0.64 0.15 72);
+  --primary-foreground: oklch(0.24 0.045 55);
+  --secondary: oklch(0.92 0.045 90);
+  --secondary-foreground: oklch(0.29 0.05 58);
+  --muted: oklch(0.92 0.035 90);
+  --muted-foreground: oklch(0.47 0.05 65);
+  --accent: oklch(0.895 0.065 88);
+  --accent-foreground: oklch(0.29 0.05 58);
+  --destructive: oklch(0.5 0.12 32);
+  --destructive-foreground: oklch(0.955 0.04 92);
+  --border: oklch(0.845 0.045 85);
+  --input: oklch(0.845 0.045 85);
+  --ring: oklch(0.64 0.15 72);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .honeycomb-bg {
+    background-image: radial-gradient(
+      circle at 50% 50%,
+      oklch(0.9 0.05 88 / 0.35) 0,
+      transparent 60%
+    );
+  }
+}
