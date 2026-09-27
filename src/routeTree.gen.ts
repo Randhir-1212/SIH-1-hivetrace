@@ -12,6 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as LogRouteImport } from './routes/log'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as DashboardAdminRouteImport } from './routes/dashboard/admin'
+import { Route as DashboardBeekeeperRouteImport } from './routes/dashboard/beekeeper'
 import { Route as TraceBatchIdRouteImport } from './routes/trace/$batchId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +32,21 @@ const LogRoute = LogRouteImport.update({
   path: '/log',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardAdminRoute = DashboardAdminRouteImport.update({
+  id: '/dashboard/admin',
+  path: '/dashboard/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardBeekeeperRoute = DashboardBeekeeperRouteImport.update({
+  id: '/dashboard/beekeeper',
+  path: '/dashboard/beekeeper',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TraceBatchIdRoute = TraceBatchIdRouteImport.update({
   id: '/trace/$batchId',
   path: '/trace/$batchId',
@@ -39,34 +57,68 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/log': typeof LogRoute
+  '/dashboard/admin': typeof DashboardAdminRoute
+  '/dashboard/beekeeper': typeof DashboardBeekeeperRoute
   '/trace/$batchId': typeof TraceBatchIdRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/log': typeof LogRoute
+  '/dashboard/admin': typeof DashboardAdminRoute
+  '/dashboard/beekeeper': typeof DashboardBeekeeperRoute
   '/trace/$batchId': typeof TraceBatchIdRoute
+  '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/log': typeof LogRoute
+  '/dashboard/admin': typeof DashboardAdminRoute
+  '/dashboard/beekeeper': typeof DashboardBeekeeperRoute
   '/trace/$batchId': typeof TraceBatchIdRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/log' | '/trace/$batchId'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/log'
+    | '/dashboard/admin'
+    | '/dashboard/beekeeper'
+    | '/trace/$batchId'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/log' | '/trace/$batchId'
-  id: '__root__' | '/' | '/auth' | '/log' | '/trace/$batchId'
+  to:
+    | '/'
+    | '/auth'
+    | '/log'
+    | '/dashboard/admin'
+    | '/dashboard/beekeeper'
+    | '/trace/$batchId'
+    | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/log'
+    | '/dashboard/admin'
+    | '/dashboard/beekeeper'
+    | '/trace/$batchId'
+    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
   LogRoute: typeof LogRoute
+  DashboardAdminRoute: typeof DashboardAdminRoute
+  DashboardBeekeeperRoute: typeof DashboardBeekeeperRoute
   TraceBatchIdRoute: typeof TraceBatchIdRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,6 +144,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/admin': {
+      id: '/dashboard/admin'
+      path: '/dashboard/admin'
+      fullPath: '/dashboard/admin'
+      preLoaderRoute: typeof DashboardAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/beekeeper': {
+      id: '/dashboard/beekeeper'
+      path: '/dashboard/beekeeper'
+      fullPath: '/dashboard/beekeeper'
+      preLoaderRoute: typeof DashboardBeekeeperRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/trace/$batchId': {
       id: '/trace/$batchId'
       path: '/trace/$batchId'
@@ -106,7 +179,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
   LogRoute: LogRoute,
+  DashboardAdminRoute: DashboardAdminRoute,
+  DashboardBeekeeperRoute: DashboardBeekeeperRoute,
   TraceBatchIdRoute: TraceBatchIdRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
